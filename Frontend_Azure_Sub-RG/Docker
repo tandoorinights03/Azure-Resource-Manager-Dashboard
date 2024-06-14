@@ -1,0 +1,84 @@
+Why MicroServices ?
+Traceback if the image correction fails.
+No Dependency on any other service.
+All api's work
+Easily Maintanable.
+Monolethic Architecture - Pain points (Show them the Benefits of why Microservices) single Front End.
+When to do it ? 
+Vnet Peering 
+Route Table
+Firewall
+**********************************************************
+Break the Backend Application in small services
+Create Docker Files for each services. Create Sub Folders for Functionalities like Sub RG Compliance and Cost for them create Docker Files
+Elephant in the room - Technology term do not deploy any app openly inside but slowly and steadily. K8
+Networking - Vnet whole umbrella which is also know as Private Network.
+Under VNET is Subnet - Private IP Address
+If still VM not Access even bringing under the VNET maybe they have not added the IP under their networking routes.
+So we create a Bastion and then we connect. Bastion Server. VM has access to K8 Cluster
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+To make your Docker image lightweight, you can follow several best practices during development and when writing your Dockerfile. Here’s a comprehensive guide to help you achieve that:
+
+Choose the Right Base Image**: 
+   - Opt for a smaller, more minimal base image that includes only the essential libraries and tools needed for your application. For instance, instead of using `ubuntu`, you might use `alpine` because it is much smaller.
+
+Minimize Layering**:
+   - Combine similar types of operations into a single layer. For example, instead of running multiple `RUN` commands, you can chain them together using logical operators like `&&`.
+   - Use multi-stage builds to separate the build environment from the final image. This allows you to compile your application in a larger image but copy the final binaries to a smaller, cleaner image.
+Reduce Installed Packages**:
+   - Install only the essential packages needed for your application. Avoid adding unnecessary tools or packages.
+   - Clean up package manager cache in the same layer where you install the packages. For example, you can use `apk add --no-cache` when using Alpine or `apt-get install -y && rm -rf /var/lib/apt/lists/*` for Debian-based images.
+Optimize Application Assets**:
+   - Remove or exclude unnecessary files, such as documentation, tests, or development tools, from the final image.
+   - Use `.dockerignore` file to exclude files and directories that should not be copied into the Docker image, reducing the build context sent to the Docker daemon.
+
+Use Slim Versions of Libraries**:
+   - When possible, use lightweight versions of libraries or frameworks. For example, if you're using Node.js, consider using the Alpine version of the Node image.
+Security and Compliance**:
+   - Regularly update your images to ensure they have the latest security patches. This not only keeps your application secure but also can reduce size as updates may optimize previous versions.
+Check for Image Layers**:
+   - Use tools like `docker history [IMAGE]` to see the size of each layer. Analyze and optimize where possible.
+Leverage Dockerignore**:
+   - Use a `.dockerignore` file to ensure that unnecessary files and directories are not added to the Docker context, particularly those that do not need to be built into the image.
+
+By applying these strategies, you can significantly reduce the size of your Docker images, which can lead to faster download times, quicker deployments, and reduced runtime resource usage.
+
+history|grep build
+  803  sudo docker build -t jcisspportalregistry.azurecr.io/ssp-backend-subscription .
+  804  docker images
+  805  sudo su
+  806  sudo docker images
+  1268  sudo rm -rf ./Sample-Jordan/
+  1306  sudo cp ./Sample-Jordan/cost-backend.yaml ./Showback_Portal/cost
+  1307  sudo cp ./Sample-Jordan/cost.py ./Showback_Portal/cost
+  ************************************************************************************
+  REMOVE EXISTING Images
+ Linux File Copy should be done in the home directory - sudo cp ./Showback_Portal/subscription/subs-backend.yaml ./Showback_Portal/resource-group
+  807  sudo docker rmi faee21ef41b3  8884b55fed28 bea1f3ffcfb9 d8a845559574
+  808  sudo docker rmi faee21ef41b3  8884b55fed28 bea1f3ffcfb9 d8a845559574 --force
+  *********************************************************************************
+  BUILD DOCKER IMAGE  - Build
+  Naming Convention - Naming Convention of the Image is done based on the Container Registry setup if done earlier just name the registry just specify the start of the container name and it will pick up automatically
+  If Container registry not setup that has to be done with giving names to the image and setting up.
+  
+  809  sudo docker images
+  810  sudo docker build -t jcisspportalregistry.azurecr.io/ssp-backend-subscription .
+  811  sudo docker images
+  812  sudo docker push jcisspportalregistry.azurecr.io/ssp-backend-subscription
+
+  *************************************************************************************
+  YAML - To be present in the Folder
+  KUBERNETES - Bad Gateway error. Locally app is reachable when deploying to kubernetes it is not. Why ?
+flask by default runs on 127.0.0.1 and listes to requests within the container only.
+[got external 0.0.0.0] to make service visible for external ip
+  Deploying to Kubernetes 
+  820  kubectl get nodes - Check nodes - or use sudo kubectl get nodes.
+  It might show error so first import the connection - KUBECONFIG
+  export KUBECONFIG=~/kubeconfig = after this is done then it will be connected.
+  820  kubectl get nodes - NodePOOL
+  820  kubectl get pods - Pods
+  828  kubectl get pods -n cloud-portal - Under particular Namespace
+  829  kubectl get deploy -n cloud-portal - Deployment Under particular Namespace
+  830  kubectl get svc -n cloud-portal - Services Under Particular Namespace
+  831  kubectl get ingressroute -n cloud-portal - Ingressroute under Particular Namespace

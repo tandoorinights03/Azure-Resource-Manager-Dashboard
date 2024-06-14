@@ -1,0 +1,51 @@
+.query-page-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.subscription-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.subscription-section > div {
+  width: 45%; /* Adjust as needed */
+}
+
+.app-name {
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 10%;
+}
+
+.query-cmdb-button {
+  margin-right: 10px;
+}
+
+.error {
+  color: red; /* Set error messages to red */
+}
+
+button {
+  margin-top: 10px;
+  padding: 5px 30px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+pre {
+  white-space: pre-wrap;
+  text-align: left;
+  font-size: 12px;
+  margin-top: 10px;
+}

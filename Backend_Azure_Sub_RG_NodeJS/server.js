@@ -8,9 +8,9 @@ const app = express();
 const port = 5000;
 
 // Azure credentials - Service Principal
-const tenantId = 'Enter your Tenant ID';
-const clientId = 'Enter Your Client ID';
-const clientSecret = 'Enter Your Client Secret';
+const tenantId = process.env.TENANT_ID || 'Enter your Tenant ID';
+const clientId = process.env.CLIENT_ID || 'Enter Your Client ID';
+const clientSecret = process.env.CLIENT_SECRET || 'Enter Your Client Secret';
 
 const credentials = new ClientSecretCredential(tenantId, clientId, clientSecret);
 

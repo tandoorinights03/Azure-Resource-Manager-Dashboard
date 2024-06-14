@@ -7,7 +7,9 @@ COPY package.json ./
 COPY package-lock.json ./
 RUN npm install
 
-COPY . ./
+COPY ./src ./src
+COPY ./public ./public
+
 RUN npm run build
 
 # Stage 2: Serve the React app
